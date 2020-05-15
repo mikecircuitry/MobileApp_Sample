@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms.Markup;
 using Xamarin.Forms;
+using SkDemo.Models;
 
 namespace SkDemo1.Pages
 {
@@ -63,6 +64,12 @@ namespace SkDemo1.Pages
 
         public void btnLogin_Clicked(object sender, EventArgs e)
         {
+            App.LoggedInUser = new User
+            {
+                Name = "Johnny Test",
+                Email = "JohnnyTest@example.com"
+            };
+
             App.Current.MainPage = new MDPage();
         }
     }

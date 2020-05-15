@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SkDemo.Models;
 using SkDemo1.Helpers;
-using SkDemo1.Models;
+using SkDemo1.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace SkDemo1.Services
 {
-    public class ProjectDataService
+    public class ProjectDataService : IProjectDataService
     {
 
         private HttpClient _httpClient;
-        private string baseAddress = "https://ee982446.ngrok.io/api/project"; 
+        private string baseAddress = "https://ee982446.ngrok.io/api/project";
 
         public ProjectDataService()
         {

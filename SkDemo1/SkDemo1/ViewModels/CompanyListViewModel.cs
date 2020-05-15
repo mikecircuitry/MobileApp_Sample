@@ -3,6 +3,7 @@ using SkDemo.Models;
 using SkDemo1.Helpers;
 using SkDemo1.Models;
 using SkDemo1.Services;
+using SkDemo1.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,28 +16,20 @@ namespace SkDemo1.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class CompanyListViewModel
     {
-        private ProjectDataService _projectService;
+        private readonly IProjectDataService _projectService;
 
         public List<Project> Projects { get; set; }
 
-        public Command AddCompanyCommand { get; set; }
-
-        public CompanyListViewModel()
+        public CompanyListViewModel(IProjectDataService projectDataService)
         {
-            _projectService = new ProjectDataService();
+            _projectService =projectDataService;
             Projects = new List<Project>();
-            AddCompanyCommand = new Command(() => AddCompany());
         }
 
         public async Task LoadProjects()
         {
             var results = await _projectService.GetAllProjects();
             Projects = results.OrderBy(c => c.Company).ToList();
-        }
-
-        public void AddCompany()
-        {
-            Logger.Log("AddCompany", "Add Company button was clicked");
         }
 
     }

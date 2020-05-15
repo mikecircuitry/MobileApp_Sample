@@ -1,4 +1,5 @@
-﻿using LiveSharp.Runtime;
+﻿using Autofac;
+using LiveSharp.Runtime;
 using SkDemo.Models;
 using SkDemo1.Helpers;
 using SkDemo1.Models;
@@ -16,15 +17,13 @@ namespace SkDemo1.Pages
 {
     public class CompanyListPage : ContentPage
     {
-        private CompanyListViewModel vm;
+        private CompanyListViewModel _viewModel;
        
         public CompanyListPage()
         {
-            vm = new CompanyListViewModel();
-          
-
-            BindingContext = vm;
-
+            _viewModel = App.Container.Resolve<CompanyListViewModel>();
+            BindingContext = _viewModel;
+           
             BuildUI();
         }
 
@@ -51,7 +50,7 @@ namespace SkDemo1.Pages
                     {
                         HasUnevenRows = true,
                         SeparatorVisibility = SeparatorVisibility.None,
-                        BackgroundColor = Color.FromHex("064971"),
+                        BackgroundColor = App.Colors.DarkBlue,
 
                         ItemTemplate = new DataTemplate( () => {
                            return new ViewCell{ View =
@@ -69,7 +68,7 @@ namespace SkDemo1.Pages
                                }
                            };
                         })
-                    }.Invoke(lv => lv.ItemTapped += ListviewItem_Tapped).Bind(ListView.ItemsSourceProperty, nameof(vm.Projects))
+                    }.Invoke(lv => lv.ItemTapped += ListviewItem_Tapped).Bind(ListView.ItemsSourceProperty, nameof(_viewModel.Projects))
                     .Row(0).Column(0),
 
                     new Button
@@ -110,7 +109,7 @@ namespace SkDemo1.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            Task.Run(async () => { await vm.LoadProjects(); });
+            Task.Run(async () => { await _viewModel.LoadProjects(); });
         }
     }
 }
