@@ -50,7 +50,9 @@ namespace SkDemo1.Pages
                                 HeightRequest = 200
                         }.Bind(Editor.TextProperty,nameof(viewModel.Description)),
 
-                    new Button{ Text = "Save", BackgroundColor = App.Colors.DarkOrange, TextColor = App.Colors.White
+                    new Button{ Text = "Save", BackgroundColor = App.Colors.DarkOrange, 
+                                TextColor = App.Colors.White,
+                                CornerRadius = 20
                     }.Bind(Button.CommandProperty, nameof(viewModel.SaveNewProjectCommand))
                     .Invoke( b => b.Clicked += button_clicked),
                 }

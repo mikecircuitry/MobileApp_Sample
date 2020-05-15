@@ -46,7 +46,6 @@ namespace SkDemo1.Pages
                      new ColumnDefinition { Width = GridLength.Auto}
                  },
 
-
                 Children ={
                     new ListView
                     {
@@ -60,20 +59,17 @@ namespace SkDemo1.Pages
                                {
                                    Margin = new Thickness(15,10),
                                    CornerRadius = 5,
-
-                                   Content = new StackLayout {
-                                   BackgroundColor = Color.White,
-                                   //Spacing = 30,
-                                   // Padding = new Thickness(15),
-                                   Children = {
-                                    new Label{TextColor = Color.Black }.Bind(Label.TextProperty, "Company")
-                                   }
-                                }
+                                   Content = new StackLayout 
+                                   {
+                                        BackgroundColor = Color.White,
+                                        Children = {
+                                            new Label{TextColor = Color.Black }.Bind(Label.TextProperty, "Company")
+                                        }
+                                    }
                                }
                            };
                         })
                     }.Invoke(lv => lv.ItemTapped += ListviewItem_Tapped).Bind(ListView.ItemsSourceProperty, nameof(vm.Projects))
-                    
                     .Row(0).Column(0),
 
                     new Button
@@ -83,7 +79,7 @@ namespace SkDemo1.Pages
                           HorizontalOptions = LayoutOptions.End,
                            VerticalOptions = LayoutOptions.End,
                            Margin = new Thickness(0,0,30,30),
-                           BackgroundColor = Color.FromHex("eda42e"),
+                           BackgroundColor = App.Colors.DarkOrange,
                            TextColor = Color.White,
                            FontSize = 35,
                            CornerRadius = 35,
