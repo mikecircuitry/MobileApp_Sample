@@ -1,4 +1,6 @@
-﻿using LiveSharp.Runtime;
+﻿using Autofac;
+using LiveSharp.Runtime;
+using SkDemo.Models;
 using SkDemo1.Helpers;
 using SkDemo1.Models;
 using SkDemo1.ViewModels;
@@ -15,16 +17,13 @@ namespace SkDemo1.Pages
 {
     public class CompanyListPage : ContentPage
     {
-        private CompanyListViewModel vm;
-        private List<Project> _projects;
+        private CompanyListViewModel _viewModel;
        
         public CompanyListPage()
         {
-            vm = new CompanyListViewModel();
-          
-
-            BindingContext = vm;
-
+            _viewModel = App.Container.Resolve<CompanyListViewModel>();
+            BindingContext = _viewModel;
+           
             BuildUI();
         }
 
@@ -46,13 +45,12 @@ namespace SkDemo1.Pages
                      new ColumnDefinition { Width = GridLength.Auto}
                  },
 
-
                 Children ={
                     new ListView
                     {
                         HasUnevenRows = true,
                         SeparatorVisibility = SeparatorVisibility.None,
-                        BackgroundColor = Color.FromHex("064971"),
+                        BackgroundColor = App.Colors.DarkBlue,
 
                         ItemTemplate = new DataTemplate( () => {
                            return new ViewCell{ View =
@@ -60,20 +58,17 @@ namespace SkDemo1.Pages
                                {
                                    Margin = new Thickness(15,10),
                                    CornerRadius = 5,
-
-                                   Content = new StackLayout {
-                                   BackgroundColor = Color.White,
-                                   //Spacing = 30,
-                                   // Padding = new Thickness(15),
-                                   Children = {
-                                    new Label{TextColor = Color.Black }.Bind(Label.TextProperty, "Company")
-                                   }
-                                }
+                                   Content = new StackLayout 
+                                   {
+                                        BackgroundColor = Color.White,
+                                        Children = {
+                                            new Label{TextColor = Color.Black }.Bind(Label.TextProperty, "Company")
+                                        }
+                                    }
                                }
                            };
                         })
-                    }.Invoke(lv => lv.ItemTapped += ListviewItem_Tapped).Bind(ListView.ItemsSourceProperty, nameof(vm.Projects))
-                    
+                    }.Invoke(lv => lv.ItemTapped += ListviewItem_Tapped).Bind(ListView.ItemsSourceProperty, nameof(_viewModel.Projects))
                     .Row(0).Column(0),
 
                     new Button
@@ -83,7 +78,7 @@ namespace SkDemo1.Pages
                           HorizontalOptions = LayoutOptions.End,
                            VerticalOptions = LayoutOptions.End,
                            Margin = new Thickness(0,0,30,30),
-                           BackgroundColor = Color.FromHex("eda42e"),
+                           BackgroundColor = App.Colors.DarkOrange,
                            TextColor = Color.White,
                            FontSize = 35,
                            CornerRadius = 35,
@@ -114,7 +109,7 @@ namespace SkDemo1.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            Task.Run(async () => { await vm.LoadProjects(); });
+            Task.Run(async () => { await _viewModel.LoadProjects(); });
         }
     }
 }

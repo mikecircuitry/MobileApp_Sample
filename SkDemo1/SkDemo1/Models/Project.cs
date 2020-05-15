@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace SkDemo1.Models
 {
-    public class Project
+    public class Projectx
     {
         public int Id { get; set; }
         public string Name { get; set; }

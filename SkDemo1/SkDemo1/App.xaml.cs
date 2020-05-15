@@ -3,8 +3,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SkDemo1.Pages;
 using System.Collections.Generic;
-using SkDemo1.Models;
+using SkDemo.Models;
 using SkDemo1.Helpers;
+using SkDemo1.Configuration;
 
 [assembly: ExportFont("materialdesign.ttf", Alias = "Material")]
 namespace SkDemo1
@@ -12,23 +13,14 @@ namespace SkDemo1
     
     public partial class App : Application
     {
-        public static List<Project> Projects;
-        public static User LoggedInUser;
+       
 
         public App()
         {
             InitializeComponent();
-            if(LoggedInUser == null)
-            {
-                LoggedInUser = new User
-                {
-                    Name = "Johnny Test",
-                    Email = "JohnnyTest@example.com"
-                };
-            }
-
-            Projects = new List<Project>();
-            MainPage = new LoginPage(); // new MDPage();
+            Container = IoCContainer.Initialize();
+           
+            MainPage = new LoginPage();
            
         }
 

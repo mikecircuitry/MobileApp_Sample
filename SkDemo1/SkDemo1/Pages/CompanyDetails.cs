@@ -1,4 +1,5 @@
-﻿using SkDemo1.Models;
+﻿using SkDemo.Models;
+using SkDemo1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,8 @@ namespace SkDemo1.Pages
                     {
                         TitleSection("Company", _viewModel.Company),
                         TitleSection("Point of Contact", $"{_viewModel.FirstName } {_viewModel.LastName}"),
+                        TitleSection("Email", _viewModel.Email),
+                        TitleSection("Project Date", _viewModel.ProjectDate.ToShortDateString()),
                         TitleSection("Project Name", _viewModel.Name),
                         TitleSection("Project Descriptions", _viewModel.Description)
                     }

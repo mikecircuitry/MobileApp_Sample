@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Autofac;
+using SkDemo.Models;
+using System;
 using System.Collections.Generic;
+
 using System.Text;
 using Xamarin.Forms;
 
@@ -7,11 +10,12 @@ namespace SkDemo1
 {
     public partial class App
     {
+        public static User LoggedInUser;
+        public static IContainer Container { get; set; }
+
         public static class ImageResource
         {
-            //public readonly static string SkookumLogo = "SkDemo1.Assets.Images.skookum_logo.png";
             public readonly static ImageSource SkookumLogo = ImageSource.FromResource("SkDemo1.Assets.Images.skookum_logo.png");
-
         }
 
         public static class Colors

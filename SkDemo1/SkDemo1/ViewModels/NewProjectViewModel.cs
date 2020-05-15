@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PropertyChanged;
+using SkDemo.Models;
 using SkDemo1.Helpers;
 using SkDemo1.Models;
 using SkDemo1.Services;
+using SkDemo1.Services.Interfaces;
 using Xamarin.Forms;
 
 namespace SkDemo1.ViewModels
@@ -16,14 +18,17 @@ namespace SkDemo1.ViewModels
     public class NewProjectViewModel
     {
         public string ProjectName { get; set; }
-        public string CompayName { get; set; }
+        public string CompanyName { get; set; }
         public string Description { get; set; }
-        public ICommand SaveNewProjectCommand{ get; set; }
-        private ProjectDataService _projectService;
+        public string CompanyNameValidation { get; set; }
 
-        public NewProjectViewModel()
+        public ICommand SaveNewProjectCommand{ get; set; }
+        private readonly IProjectDataService _projectService;
+
+        public NewProjectViewModel(IProjectDataService projectDataService)
         {
-            _projectService = new ProjectDataService();
+            _projectService = projectDataService;
+
             SaveNewProjectCommand = new Command(async () => await SaveProject());
         }
 
@@ -33,15 +38,27 @@ namespace SkDemo1.ViewModels
 
             try
             {
-                var proj = new Project
-                {
-                    Name = ProjectName,
-                    Company = CompayName,
-                    Description = Description,
-                    ProjectDate = DateTime.Now
-                };
+                var isValid = true;
 
-             proj =  await _projectService.Add(proj);
+                if (string.IsNullOrEmpty(CompanyName))
+                {
+                    isValid = false;
+                    CompanyNameValidation = "Company name is required";
+                }
+
+                if (isValid)
+                {
+                    var proj = new Project
+                    {
+                        Name = ProjectName,
+                        Company = CompanyName,
+                        Description = Description,
+                        ProjectDate = DateTime.Now
+                    };
+
+                    proj = await _projectService.Add(proj);
+                }
+               
             }
             catch (Exception ex)
             {
