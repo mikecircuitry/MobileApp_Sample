@@ -30,7 +30,7 @@ namespace SkDemo1.ViewModels
         public async Task LoadProjects()
         {
             var results = await _projectService.GetAllProjects();
-            Projects = results.ToList();
+            Projects = results.OrderBy(c => c.Company).ToList();
         }
 
         public void AddCompany()

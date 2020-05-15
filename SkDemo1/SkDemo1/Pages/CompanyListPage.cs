@@ -1,4 +1,5 @@
 ﻿using LiveSharp.Runtime;
+using SkDemo1.Helpers;
 using SkDemo1.Models;
 using SkDemo1.ViewModels;
 using System;
@@ -16,10 +17,11 @@ namespace SkDemo1.Pages
     {
         private CompanyListViewModel vm;
         private List<Project> _projects;
+       
         public CompanyListPage()
         {
             vm = new CompanyListViewModel();
-            Task.Run(async () => { await vm.LoadProjects(); });
+          
 
             BindingContext = vm;
 
@@ -70,7 +72,8 @@ namespace SkDemo1.Pages
                                }
                            };
                         })
-                    }.Bind(ListView.ItemsSourceProperty, nameof(vm.Projects))
+                    }.Invoke(lv => lv.ItemTapped += ListviewItem_Tapped).Bind(ListView.ItemsSourceProperty, nameof(vm.Projects))
+                    
                     .Row(0).Column(0),
 
                     new Button
@@ -96,9 +99,22 @@ namespace SkDemo1.Pages
             await Navigation.PushAsync(new NewProjectPage());
         }
 
+        public async void ListviewItem_Tapped(object sender, EventArgs e)
+        {
+            var lv = (ListView)sender;
+            var selectedItem = (Project)lv.SelectedItem;
+
+            ((ListView)sender).SelectedItem = null;
+
+            Logger.Log("selected item", selectedItem.Company);
+
+            await Navigation.PushAsync(new CompanyDetailsPage(selectedItem));
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            Task.Run(async () => { await vm.LoadProjects(); });
         }
     }
 }

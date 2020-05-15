@@ -37,7 +37,8 @@ namespace SkDemo1.ViewModels
                 {
                     Name = ProjectName,
                     Company = CompayName,
-                    Description = Description
+                    Description = Description,
+                    ProjectDate = DateTime.Now
                 };
 
              proj =  await _projectService.Add(proj);

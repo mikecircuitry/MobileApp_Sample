@@ -15,6 +15,7 @@ namespace SkDemo1.Models
         public static List<SkookumMenuItem> GetMenus() => new List<SkookumMenuItem>()
         {
             new SkookumMenuItem{ Icon = Icons.Material.Home, Name = "Home", AppPage = new CompanyListPage() },
+            new SkookumMenuItem { Icon = Icons.Material.Logout, Name = "Log Out", AppPage = new LoginPage()}
 
         };
     }

@@ -75,19 +75,21 @@ namespace SkDemo1.Pages
                                 View = new StackLayout
                                 {
                                     Orientation = StackOrientation.Horizontal,
-                                    Spacing = 40,
+                                    Spacing = 20,
                                     Padding = new Thickness(30,0,0,0),
                                     Children =
                                     {
                                         new Label { FontFamily = Icons.Material.FontFamily,
                                                     TextColor = App.Colors.White,
-                                                    FontSize = 32,
-                                                    HorizontalOptions = LayoutOptions.Center
+                                                    FontSize = 23,
+                                                    HorizontalOptions = LayoutOptions.Center,
+                                                    VerticalOptions = LayoutOptions.Center
                                         }.Bind(Label.TextProperty,"Icon"),
 
                                         new Label { TextColor = App.Colors.White,
-                                          FontSize = 25,
-                                                    HorizontalOptions = LayoutOptions.Center
+                                          FontSize = 20,
+                                                    HorizontalOptions = LayoutOptions.Center,
+                                                     VerticalOptions = LayoutOptions.Center
                                         }.Bind(Label.TextProperty, "Name")
                                     }
                                 }
@@ -110,13 +112,21 @@ namespace SkDemo1.Pages
             if (selectedItem == null)
                 return;
 
-            _parentPage.Detail = new Xamarin.Forms.NavigationPage(selectedItem.AppPage)
+            if(selectedItem.Name.Equals("Log Out", StringComparison.OrdinalIgnoreCase))
             {
-                IconImageSource = new FontImageSource { Glyph = Icons.Material.Menu, Color = Color.Black, FontFamily = Icons.Material.FontFamily, Size = 60 },
-                BarTextColor = Color.Black
-            };
+                App.Current.MainPage = selectedItem.AppPage;
+            }
+            else
+            {
+                _parentPage.Detail = new Xamarin.Forms.NavigationPage(selectedItem.AppPage)
+                {
+                    IconImageSource = new FontImageSource { Glyph = Icons.Material.Menu, Color = Color.Black, FontFamily = Icons.Material.FontFamily, Size = 60 },
+                    BarTextColor = Color.Black
+                };
 
-            _parentPage.IsPresented = false;
+                _parentPage.IsPresented = false;
+            }
+         
         }
 
         public void btnNewCompany_Clicked(object sender, EventArgs e)
