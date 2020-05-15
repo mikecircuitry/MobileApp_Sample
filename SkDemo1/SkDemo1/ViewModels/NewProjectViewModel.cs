@@ -20,15 +20,21 @@ namespace SkDemo1.ViewModels
         public string ProjectName { get; set; }
         public string CompanyName { get; set; }
         public string Description { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public DateTime ProjectDate { get; set; }
         public string CompanyNameValidation { get; set; }
-
         public ICommand SaveNewProjectCommand{ get; set; }
+        public INavigation Navigation { get; set; }
+
+
         private readonly IProjectDataService _projectService;
 
         public NewProjectViewModel(IProjectDataService projectDataService)
         {
             _projectService = projectDataService;
-
+            ProjectDate = DateTime.Today;
             SaveNewProjectCommand = new Command(async () => await SaveProject());
         }
 
@@ -53,10 +59,14 @@ namespace SkDemo1.ViewModels
                         Name = ProjectName,
                         Company = CompanyName,
                         Description = Description,
-                        ProjectDate = DateTime.Now
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        ProjectDate = ProjectDate,
+                        Email = Email
                     };
 
                     proj = await _projectService.Add(proj);
+                    await Navigation.PopAsync();
                 }
                
             }

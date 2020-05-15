@@ -28,9 +28,9 @@ namespace SkDemo1.Pages
                     new Image { Source = App.ImageResource.SkookumLogo,
                                                     Aspect = Aspect.AspectFit,
                                                     HeightRequest = 200},
-
+                    //TODO: Make textcolor white
                     new Label { Text = "SKOOKUM", 
-                                TextColor = Color.White, 
+                                TextColor = Color.Black, 
                                 FontAttributes = FontAttributes.Bold, 
                                 FontSize = 30,
                                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -47,8 +47,8 @@ namespace SkDemo1.Pages
                     new Button { Text = "Login" ,
                                 TextColor = App.Colors.White,
                                 BackgroundColor = App.Colors.DarkOrange,
-                                Margin = new Thickness(20),
-                                CornerRadius = 20}.Invoke( b => b.Clicked += btnLogin_Clicked),
+                                Margin = new Thickness(0,20),
+                                }.Invoke( b => b.Clicked += btnLogin_Clicked),
 
                     new Label { Text = "A Global Logic Company",
                                 TextColor = Color.White,
