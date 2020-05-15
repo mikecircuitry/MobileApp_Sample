@@ -1,4 +1,5 @@
 ﻿using LiveSharp.Runtime;
+using SkDemo.Models;
 using SkDemo1.Helpers;
 using SkDemo1.Models;
 using SkDemo1.ViewModels;
@@ -16,7 +17,6 @@ namespace SkDemo1.Pages
     public class CompanyListPage : ContentPage
     {
         private CompanyListViewModel vm;
-        private List<Project> _projects;
        
         public CompanyListPage()
         {

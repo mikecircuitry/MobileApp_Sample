@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PropertyChanged;
+using SkDemo.Models;
 using SkDemo1.Helpers;
 using SkDemo1.Models;
 using SkDemo1.Services;

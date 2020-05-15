@@ -11,6 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Project.cs" />
+    <Compile Remove="Models\User.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\Fonts\materialdesign.ttf" />
     <None Remove="Assets\Images\skookum_logo.png" />
   </ItemGroup>
@@ -31,6 +36,10 @@
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\skDemo.Models\SkDemo.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

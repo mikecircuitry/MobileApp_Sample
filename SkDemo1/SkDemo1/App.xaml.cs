@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SkDemo1.Pages;
 using System.Collections.Generic;
-using SkDemo1.Models;
+using SkDemo.Models;
 using SkDemo1.Helpers;
 
 [assembly: ExportFont("materialdesign.ttf", Alias = "Material")]
